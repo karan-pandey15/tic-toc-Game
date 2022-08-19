@@ -1,0 +1,136 @@
+
+
+
+<0
+!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
+  <title>Tic-Toc-Game</title>
+<style>
+  h1{
+    font-size: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+p{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 20px;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+th{
+    width:130px;
+    height: 130px;
+    background-color: black;
+    color: white;
+    border-radius: 10px;
+    font-size: 65px;
+    
+
+}
+
+</style>
+</head>
+<body>
+  
+  <h1>  <b>  Tic-Toc-Game </b> </h1>
+  <p>    designed and developed by karan pandey  </p>
+  <p id="player"> Let`s Play  </p>  
+
+
+  
+  
+  <center>
+    <table border="0" cellspacing="5" >
+    <tr>
+      <th id="b1" onclick="printx('1')" ></th>
+
+      <th id="b2"  onclick="printx('2')"></th>
+      <th id="b3"  onclick="printx('3')"></th>
+      
+    </tr>
+    
+    
+    <tr>
+      <th id="b4"  onclick="printx('4')"></th>
+      <th id="b5"  onclick="printx('5')"></th>
+      <th id="b6"  onclick="printx('6')"></th>
+      onclick="printx('')"
+      
+    </tr>
+    
+    
+    <tr>
+      <th id="b7"  onclick="printx('7')"></th>
+      <th id="b8"  onclick="printx('8')"></th>
+      <th id="b9"  onclick="printx('9')"></th>
+      
+    </tr>
+  </table>
+</center>
+<script>
+  let sign = "X";
+let display = document.getElementById("player");
+
+
+function printx(number) {
+    let boxelement = document.getElementById("b" + number)
+    console.log(boxelement);
+
+    if (boxelement.innerText == "") {
+
+        boxelement.innerHTML = sign;
+        winner();
+        checksign();
+        display.innerHTML = "<font size ='5'><b>" + sign + " its your turn </b></font>";
+    }
+}
+function checksign() {
+    if (sign == "X") sign = "O";
+    else
+        sign = "X";
+}
+
+function getbox(no) {
+    return document.getElementById("b" + no).innerHTML;
+
+}
+function checkmove(a, b, c, m) {
+    if (getbox(a) == m && getbox(b) == m && getbox(c) == m)
+        return true;
+    else
+        return false;
+
+}
+
+function winner() {
+    if (checkmove(1, 2, 3, sign) || checkmove(4, 5, 6, sign) || checkmove(7, 8, 9, sign) || checkmove(1, 4, 6, sign) || checkmove(2, 5, 8, sign) || checkmove(3, 6, 9, sign) || checkmove(1, 5, 9, sign) || checkmove(3, 5, 7, sign)){
+        display.innerHTML = "<font size = '5'><b>" + sign + "wins</b></font> " ;
+        for(i=1; i<=9; i++){
+            document.getElementById("b"+ i).innerHTML="";
+        }
+        throw "Game end";
+    }
+    else{
+        if(getbox(1)!="" && getbox(2)!="" && getbox(3)!=""
+         && getbox(4)!="" && getbox(5)!="" && getbox(6)!="" &&
+         getbox(7)!="" && getbox(8)!="" && getbox(9)!="" ){
+
+            
+        display.innerHTML = "<font size = '5'><b>"+ " its a tie</b></font> " ;
+        throw "its a tie"
+         }
+        
+
+    }
+}
+
+</script>
+</body>
+</html>
